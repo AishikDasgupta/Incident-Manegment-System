@@ -25,6 +25,13 @@ def log_incident():
         mysql.connection.commit()
         cur.close()
         return jsonify({'message': 'Incident logged successfully!'})
+    
+@app.route('/chat', methods=['POST'])
+def chat():
+    message = request.form['message']
+    response = chatbot_response(message)
+    return jsonify({'response': response})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
